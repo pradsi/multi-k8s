@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersions": 2,
+    "containerDefinitions":[
+        {
+            "name": "client",
+            "image": "pradsi/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "pradsi/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "pradsi/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "pradsi/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings":[
+                {
+                    "hostPort": 80, 
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }]
+    }
+}

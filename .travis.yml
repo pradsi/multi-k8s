@@ -21,3 +21,17 @@ after_success:
   - docker push pradsi/multi-nginx
   - docker push pradsi/multi-server
   - docker push pradsi/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-372866895787
+  bucket-path: multi-docker
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
